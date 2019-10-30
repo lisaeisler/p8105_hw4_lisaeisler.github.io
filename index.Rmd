@@ -1,7 +1,27 @@
 ---
-title: "Holy cow!"
+title: "Lisa Eisler's Website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
-### I have a webpage!
+### This is Lisa Eisler (Lareau) MD's first website!
 
-And I can put all kinds of stuff on it!
+![](https://media.giphy.com/media/l2Je1LPXgHzLpZXxe/giphy.gif)
+
+(I am an anesthesiologist)
+
+So far, I have a resume and some basic plots created in my Data Science class.
+
+# I like summertime and making sand castles
+
+![](https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif)
+
+Having kids gives me an excuse to act like a kid again.
+
+<img src="Rowan on beach.png" style="width:70%">
+
+# My most used site recently
+
+I have been reading this article a lot recently [posture](https://www.nature.com/articles/s41598-018-21625-1).
