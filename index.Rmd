@@ -12,13 +12,13 @@ output:
 
 (I am an anesthesiologist)
 
-So far, I have a resume and some basic plots created in my Data Science class.
+So far, I have a [Resume](Curriculum_Vitae.html) and some basic plots created in my Data Science class.
 
 # I like summertime and making sand castles
 
 ![](https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif)
 
-Having kids gives me an excuse to act like a kid again.
+Even if it's winter, I'm on the beach with my kiddos.
 
 <img src="images/Rowan_on_beach.jpg" style="width:75%">
 

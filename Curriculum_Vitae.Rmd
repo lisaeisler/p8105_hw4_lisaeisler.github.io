@@ -1,0 +1,8 @@
+---
+title: "Curriculum Vitae"
+---
+
+## Here is a screenshot of my automatic resume populated by *Doximity.com*
+
+<img src="images/eisler_CV1.jpg" style="width:75%">
+<img src="images/eisler_CV2.jpg" style="width:75%">
