@@ -13,7 +13,7 @@ output:
 
 I am an anesthesiologist, if you believe [doximity](doximity.com/profiles/37aa21f6-e78c-448e-a3e6-f85f511361a7).
 
-So far, I have a [Resume](Curriculum_Vitae.html) and some basic plots created in my Data Science class.
+So far, I have a [resume](Curriculum_Vitae.html) and some basic plots created in my first [dashboard](dashboard.html) created for my Data Science class.
 
 Find my code for various homework assignments on [github](github.com/lisaeisler). If you'd like you can [email](ldl2113@cumc.columbia.edu) me with any questions.
 

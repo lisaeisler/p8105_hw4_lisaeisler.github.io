@@ -1,13 +1,16 @@
-name: "Yay internet!"
+name: "Homework 4 Web Formatting"
 output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "About"
-      href: about.html
+    - text: "resume"
+      href: Curriculum_Vitae.html
+    - text: "dashboard"
+      href: dashboard.html
     - icon: fa-envelope fa-lg
-      href: mailto:<ldl2113@cumc.columbia.edu>
+      href: mailto:ldl2113@cumc.columbia.edu
     - icon: fa-github fa-lg
-      href: http://github.com/p8105_hw4_lisaeisler.github.io/
+      href: http://github.com/lisaeisler/
 output:
-  html_document
+  html_document:
+    theme: flatly

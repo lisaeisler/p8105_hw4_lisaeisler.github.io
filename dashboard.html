@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>My First Dashboard</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Curriculum_Vitae.html">resume</a>
+</li>
+<li>
+  <a href="dashboard.html">dashboard</a>
+</li>
+<li>
+  <a href="mailto:ldl2113@cumc.columbia.edu">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/lisaeisler/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">My First Dashboard</h1>
+
+</div>
+
+
+<pre class="r"><code>rest_inspec_american =
+  rest_inspec %&gt;%
+  filter(boro != &quot;Missing&quot;) %&gt;% 
+  filter(str_detect(dba, &quot;[Aa][Mm][Ee][Rr][Ii][Cc][Aa][Nn]&quot;)) %&gt;%
+  mutate(
+    year = substr(as.character(inspection_date), 1,4), 
+    boro = str_to_title(boro),
+    score = as.numeric(score))</code></pre>
+<pre class="r"><code>rest_inspec_line=
+  rest_inspec_american %&gt;% 
+  group_by(year, boro) %&gt;%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE)
+  )</code></pre>
+<pre><code>
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Boxplot showing the distribution of scores by year
+
+
+```r
+rest_inspec_american %&gt;% 
+  plot_ly(y = ~score, color = ~year, type = &quot;box&quot;,
+          colors = &quot;Set2&quot;)</code></pre>
+<pre><code>## Warning: Ignoring 65 observations</code></pre>
+<div id="htmlwidget-a23e7f922824ebd60113" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a23e7f922824ebd60113">{"x":{"visdat":{"45607bf52c5c":["function () ","plotlyVisDat"]},"cur_data":"45607bf52c5c","attrs":{"45607bf52c5c":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"score"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(102,194,165,0.5)","y":[19,27,19,27,27,19,27,27,38,38,38,38],"type":"box","name":"2013","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(178,156,177,0.5)","y":[19,19,10,19,19,17,17,28,28,5,28,10,12,10,28,17,12,12,12,28,15,15,15,13,13,13,11,11,11,11,11,8,11,11,11,11,33,33,33,11,11,11,11,11,3,20,12,21,21,21,20,12,7,21,20,20,14,14,25,25,14,25,14,25,9,16,25,9,16,15,25,25,16,9,15,16,25,25,25,10,4,3,10,13,10,10,10,13,4,30,30,30,30,30,30,27,22,22,27,22,27,27,81,16,81,81,81,81,81,16,81,10,81,81,16,10,16,18,16,16,16,12,18,18,12,18,16,11,11,11,11,11,13,12,7,12,7,13,12,13,13,13,13,0,13,13,5,21,21,27,27,27,21,21,21,21,27,27,25,11,25,25,13,11,25,13,11,25,13,11,11,7,7,8,9,9,9,13,13,13,13,12,12,12,7,26,11,11,26,26,13,26,11,7,8,8,26,13,40,40,40,40,40,33,19,9,33,9,19,19,33,33,33,9,9,10,10,10,19,19,10,11,11,11,11,11,11,11,11,11,10,11,19,19,18,18,22,19,22,19,18,18,13,19,18,19,18,12,13,12,18,12,22,18],"type":"box","name":"2014","marker":{"color":"rgba(178,156,177,1)","line":{"color":"rgba(178,156,177,1)"}},"line":{"color":"rgba(178,156,177,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(205,181,144,0.5)","y":[11,11,13,11,13,11,11,11,13,16,20,11,17,17,20,18,24,26,12,24,18,7,20,24,7,11,20,11,7,16,7,16,26,12,18,17,24,11,11,11,18,12,12,13,18,13,13,18,8,12,40,40,40,10,10,10,10,40,40,40,12,10,40,40,19,19,17,17,23,12,13,18,13,23,23,18,18,12,5,19,19,12,19,5,19,12,9,5,17,18,17,2,12,18,18,17,17,5,12,9,14,10,10,7,14,7,9,9,9,18,11,18,18,11,18,12,10,10,10,12,32,24,24,24,24,10,32,24,32,4,65,65,65,65,65,10,65,4,48,48,48,27,27,24,24,24,8,19,19,48,48,27,24,27,48,19,27,27,48,48,24,2,2,12,12,8,8,7,7,23,22,22,22,23,22,23,10,10,26,26,12,9,26,12,9,26,26,26,12,12,38,12,38,12,38,11,12,11,12,16,16,12,12,11,16,9,9,9,18,18,18,10,10,18,9,9,5,20,7,20,20,20,17,17,7,7,20,17,13,17,17,13,6,17,17,6,9,9,13,12,2,12,12,15,45,11,10,10,45,11,11,45,45,15,7,15,7,10,12,23,6,7,7,6,23,23,23,23,12,12,12,2,7,7,9,17,9,5,17,17,17,9,16,6,16,16,6,16,2,22,10,18,17,22,22,2,22,22,18,10,17,18,17,11,17,7,17,7,11,17,17,8,11,31,7,70,70,31,70,35,35,70,35,8,70,35,70,8,31,70,7,35,31,7,10,4,10,4,9,9,9,29,29,7,2,12,7,29,29,29,12,9,9,11,28,11,11,2,13,9,9,13,13,14,24,20,10,24,20,11,24,10,11,8,14,11,20,10,20,14,20,11],"type":"box","name":"2015","marker":{"color":"rgba(205,181,144,1)","line":{"color":"rgba(205,181,144,1)"}},"line":{"color":"rgba(205,181,144,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(250,212,80,0.5)","y":[12,4,12,11,11,11,29,29,9,29,7,9,10,12,7,13,12,29,5,9,10,13,12,10,13,10,10,10,22,12,22,22,12,12,11,27,11,11,11,27,27,20,9,20,9,9,9,20,20,20,13,13,27,27,11,11,27,27,27,9,9,9,9,21,21,18,12,10,12,12,10,18,12,21,21,18,10,18,18,12,27,21,21,27,27,21,27,25,14,25,25,14,25,25,11,11,11,29,29,29,18,18,11,29,18,11,29,18,12,12,12,15,15,7,27,12,27,27,27,27,12,13,13,13,18,18,18,10,18,18,10,10,18,8,4,4,21,21,21,21,4,4,8,8,10,11,11,19,19,10,19,19,13,13,19,9,19,19,10,13,9,19,13,6,20,20,6,6,6,20,6,21,21,21,13,12,13,12,13,7,7,8,8,13,13,13,9,9,9,0,4,10,25,12,10,4,12,10,25,25,25,13,5,13,13,6,10,10,17,11,18,26,26,12,26,17,18,18,11,12,26,26,17,17,12,13,12,13,13,4,13,10,12,10,12,12,13,4,7,21,18,10,12,21,18,18,21,12,10,21,10,12,12,5,5,4,7,7,23,11,23,23,23,11,11,11,41,10,20,10,20,41,20,11,41,0,11,20,12,20,11,11,20,12,12,11,16,25,16,16,13,12,12,13,13,25,16,12,25,13,7,7],"type":"box","name":"2016","marker":{"color":"rgba(250,212,80,1)","line":{"color":"rgba(250,212,80,1)"}},"line":{"color":"rgba(250,212,80,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(179,179,179,0.5)","y":[4,4,13,13,11,13,11,13,11,11,13,11,13,35,35,35,35,35,35,17,7,7,17,17,3,12,12,8,8,12,22,22,22,7,22,22,35,22,22,35,22,35,35,35,35,35,19,19,19,19,3,7,18,18,12,18,12,18,18,26,26,26,26,26,11,11,9,94,94,94,94,94,94,94,94,94,94,94,2,94,94,55,55,30,55,30,55,55,3,30,55,30,30,12,12,12,29,29,29,12,7,29,12,29,29,7,16,16,7,16,12,12,8,8,25,25,25,25,5,48,25,48,48,48,48,25,48,48,25,48,25,48,93,93,93,93,93,0,20,12,48,48,7,20,48,20,12,20,7,20,48,17,24,24,2,24,17,24,17,24,17,24,11,11,11,11,36,9,36,36,9,36,10,15,10,15,12,12,12,12,12,12,12,9,9,20,20,20,17,12,17,11,12,17,11,5,12,0,13,13,13,12,13,8,6,6,6,12,12,12,13,17,13,9,9,17,17,13,38,38,38,8,8,38,38,38,8,8,76,12,76,4,76,5,76,76,76,76,12,12,76,76,12,4,4,17,17,17,6,17,6,13,13,13,13,20,20,9,20,11,11,12,12,12,9,26,13,12,12,26,13,26,26,12,13,26,13,12,12,12,13,13,13,13],"type":"box","name":"2017","marker":{"color":"rgba(179,179,179,1)","line":{"color":"rgba(179,179,179,1)"}},"line":{"color":"rgba(179,179,179,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="column" class="section level2" data-width="350">
+<h2>Column</h2>
+<div id="line-plot-showing-the-mean-score-for-each-borough-over-time." class="section level3">
+<h3>Line plot showing the mean score for each borough over time.</h3>
+<pre class="r"><code>line_ggplot = 
+  rest_inspec_line %&gt;%
+  ggplot(aes(x = year, y = mean_score, color = boro)) +
+  geom_point() + 
+  geom_line()
+
+ggplotly(line_ggplot)</code></pre>
+<div id="htmlwidget-63f5775625b5219abc85" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-63f5775625b5219abc85">{"x":{"data":[{"x":[2,3,4,5],"y":[12.7037037037037,17.1428571428571,14.0789473684211,32.5],"text":["year: 2014<br />mean_score: 12.70370<br />boro: Bronx","year: 2015<br />mean_score: 17.14286<br />boro: Bronx","year: 2016<br />mean_score: 14.07895<br />boro: Bronx","year: 2017<br />mean_score: 32.50000<br />boro: Bronx"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Bronx","legendgroup":"Bronx","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5],"y":[38,16.6756756756757,14.5070422535211,11.6296296296296,11.8235294117647],"text":["year: 2013<br />mean_score: 38.00000<br />boro: Brooklyn","year: 2014<br />mean_score: 16.67568<br />boro: Brooklyn","year: 2015<br />mean_score: 14.50704<br />boro: Brooklyn","year: 2016<br />mean_score: 11.62963<br />boro: Brooklyn","year: 2017<br />mean_score: 11.82353<br />boro: Brooklyn"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)"}},"hoveron":"points","name":"Brooklyn","legendgroup":"Brooklyn","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5],"y":[24,22,20,16.3602941176471,29.0350877192982],"text":["year: 2013<br />mean_score: 24.00000<br />boro: Manhattan","year: 2014<br />mean_score: 22.00000<br />boro: Manhattan","year: 2015<br />mean_score: 20.00000<br />boro: Manhattan","year: 2016<br />mean_score: 16.36029<br />boro: Manhattan","year: 2017<br />mean_score: 29.03509<br />boro: Manhattan"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Manhattan","legendgroup":"Manhattan","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,3,4,5],"y":[17.6986301369863,18.9056603773585,14.950495049505,22.6547619047619],"text":["year: 2014<br />mean_score: 17.69863<br />boro: Queens","year: 2015<br />mean_score: 18.90566<br />boro: Queens","year: 2016<br />mean_score: 14.95050<br />boro: Queens","year: 2017<br />mean_score: 22.65476<br />boro: Queens"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)"}},"hoveron":"points","name":"Queens","legendgroup":"Queens","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,null,3,null,4,null,5],"y":[12.7037037037037,null,17.1428571428571,null,14.0789473684211,null,32.5],"text":["year: 2014<br />mean_score: 12.70370<br />boro: Bronx",null,"year: 2015<br />mean_score: 17.14286<br />boro: Bronx",null,"year: 2016<br />mean_score: 14.07895<br />boro: Bronx",null,"year: 2017<br />mean_score: 32.50000<br />boro: Bronx"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Bronx","legendgroup":"Bronx","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,null,2,null,3,null,4,null,5],"y":[38,null,16.6756756756757,null,14.5070422535211,null,11.6296296296296,null,11.8235294117647],"text":["year: 2013<br />mean_score: 38.00000<br />boro: Brooklyn",null,"year: 2014<br />mean_score: 16.67568<br />boro: Brooklyn",null,"year: 2015<br />mean_score: 14.50704<br />boro: Brooklyn",null,"year: 2016<br />mean_score: 11.62963<br />boro: Brooklyn",null,"year: 2017<br />mean_score: 11.82353<br />boro: Brooklyn"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)","dash":"solid"},"hoveron":"points","name":"Brooklyn","legendgroup":"Brooklyn","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,null,2,null,3,null,4,null,5],"y":[24,null,22,null,20,null,16.3602941176471,null,29.0350877192982],"text":["year: 2013<br />mean_score: 24.00000<br />boro: Manhattan",null,"year: 2014<br />mean_score: 22.00000<br />boro: Manhattan",null,"year: 2015<br />mean_score: 20.00000<br />boro: Manhattan",null,"year: 2016<br />mean_score: 16.36029<br />boro: Manhattan",null,"year: 2017<br />mean_score: 29.03509<br />boro: Manhattan"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"Manhattan","legendgroup":"Manhattan","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,null,3,null,4,null,5],"y":[17.6986301369863,null,18.9056603773585,null,14.950495049505,null,22.6547619047619],"text":["year: 2014<br />mean_score: 17.69863<br />boro: Queens",null,"year: 2015<br />mean_score: 18.90566<br />boro: Queens",null,"year: 2016<br />mean_score: 14.95050<br />boro: Queens",null,"year: 2017<br />mean_score: 22.65476<br />boro: Queens"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)","dash":"solid"},"hoveron":"points","name":"Queens","legendgroup":"Queens","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,5.6],"tickmode":"array","ticktext":["2013","2014","2015","2016","2017"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["2013","2014","2015","2016","2017"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[10.3111111111111,39.3185185185185],"tickmode":"array","ticktext":["20","30"],"tickvals":[20,30],"categoryorder":"array","categoryarray":["20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mean_score","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"boro","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"45602f69ac6":{"x":{},"y":{},"colour":{},"type":"scatter"},"456065407c3b":{"x":{},"y":{},"colour":{}}},"cur_data":"45602f69ac6","visdat":{"45602f69ac6":["function (y) ","x"],"456065407c3b":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="bar-chart-showing-the-number-of-american-restaurants-in-each-borough" class="section level3">
+<h3>Bar chart showing the number of American restaurants in each borough</h3>
+<pre class="r"><code>rest_inspec_american %&gt;% 
+  count(boro) %&gt;%
+  mutate(boro = fct_reorder(boro, n)) %&gt;% 
+  plot_ly(x = ~boro, y = ~n, color = ~boro, type = &quot;bar&quot;)</code></pre>
+<div id="htmlwidget-fd260985e6e9632ec064" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fd260985e6e9632ec064">{"x":{"visdat":{"456011567ed6":["function () ","plotlyVisDat"]},"cur_data":"456011567ed6","attrs":{"456011567ed6":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"boro","type":"category","categoryorder":"array","categoryarray":["Bronx","Brooklyn","Queens","Manhattan"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Bronx"],"y":[170],"type":"bar","name":"Bronx","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Brooklyn"],"y":[186],"type":"bar","name":"Brooklyn","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Queens"],"y":[379],"type":"bar","name":"Queens","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Manhattan"],"y":[564],"type":"bar","name":"Manhattan","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

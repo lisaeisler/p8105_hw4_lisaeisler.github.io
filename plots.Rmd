@@ -1,0 +1,75 @@
+---
+title: "NYC Restaurant Inspection Data"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(viridis)
+library(p8105.datasets)
+library(plotly)
+library(httr)
+library(jsonlite)
+```
+
+```{r}
+rest_inspec_american =
+  rest_inspec %>%
+  filter(boro != "Missing") %>% 
+  filter(str_detect(dba, "[Aa][Mm][Ee][Rr][Ii][Cc][Aa][Nn]")) %>%
+  mutate(
+    year = substr(as.character(inspection_date), 1,4), 
+    boro = str_to_title(boro),
+    score = as.numeric(score))
+```
+
+## Boxplot 
+
+This plot shows the distribution of scores by year.
+
+```{r}
+rest_inspec_american %>% 
+  plot_ly(y = ~score, color = ~year, type = "box",
+          colors = "Set2")
+```
+
+
+```{r}
+rest_inspec_line=
+  rest_inspec_american %>% 
+  group_by(year, boro) %>%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE)
+  )
+```
+
+## Line plot
+
+This plot shows the mean_score for each borough over time.
+
+```{r}
+line_ggplot = 
+  rest_inspec_line %>%
+  ggplot(aes(x = year, y = mean_score, color = boro)) +
+  geom_point() + 
+  geom_line()
+
+ggplotly(line_ggplot)
+```
+
+Mean scores are the highest ever for all boroughs except Brooklyn.
+
+## Bar chart
+
+This chart shows the number of American restaurants in each borough.
+
+```{r}
+rest_inspec_american %>% 
+  count(boro) %>%
+  mutate(boro = fct_reorder(boro, n)) %>% 
+  plot_ly(x = ~boro, y = ~n, color = ~boro, type = "bar")
+```
