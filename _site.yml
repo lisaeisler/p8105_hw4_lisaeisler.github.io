@@ -3,9 +3,9 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "resume"
+    - text: "Resume"
       href: Curriculum_Vitae.html
-    - text: "dashboard"
+    - text: "Dashboard"
       href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:ldl2113@cumc.columbia.edu
