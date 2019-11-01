@@ -36,7 +36,7 @@ rest_inspec_line=
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Boxplot showing the distribution of scores by year
+### Boxplot showing the distribution of scores given to American restaurants by year
 
 ```{r, warning=FALSE, echo=FALSE}
 rest_inspec_american %>% 
@@ -44,10 +44,11 @@ rest_inspec_american %>%
           colors = "Set2")
 ```
 
+
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Line plot showing the mean score for each borough over time
+### Line plot showing the mean score for American restaurants in each borough over time
 
 ```{r, echo=FALSE}
 line_ggplot = 
