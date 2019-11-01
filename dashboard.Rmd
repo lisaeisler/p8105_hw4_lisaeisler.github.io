@@ -15,7 +15,7 @@ library(plotly)
 # rmarkdown::render("dashboard.rmd", output_format = "flexdashboard::flex_dashboard")
 ```
 
-```{r, echo=FALSE, message=FALSE}
+```{r, warning=FALSE, echo=FALSE}
 rest_inspec_american =
   rest_inspec %>%
   filter(boro != "Missing") %>% 
@@ -38,17 +38,16 @@ Column {data-width=650}
 
 ### Boxplot showing the distribution of scores by year
 
-```{r, echo=FALSE}
+```{r, warning=FALSE, echo=FALSE}
 rest_inspec_american %>% 
   plot_ly(y = ~score, color = ~year, type = "box",
           colors = "Set2")
 ```
 
-
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Line plot showing the mean score for each borough over time.
+### Line plot showing the mean score for each borough over time
 
 ```{r, echo=FALSE}
 line_ggplot = 
